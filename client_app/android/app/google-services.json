@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "307288245777",
+    "project_id": "sewagerobot-77461",
+    "storage_bucket": "sewagerobot-77461.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307288245777:android:54680500404e12097c93b0",
+        "android_client_info": {
+          "package_name": "com.example.client_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307288245777-q5eb4pcso9crfvto7j7jl39ru9smsne4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRPbx2jwmdDhg55Ism2UsRP0yPcIupqcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307288245777-q5eb4pcso9crfvto7j7jl39ru9smsne4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307288245777:android:6679090cfac18ae47c93b0",
+        "android_client_info": {
+          "package_name": "com.example.machine_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307288245777-q5eb4pcso9crfvto7j7jl39ru9smsne4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRPbx2jwmdDhg55Ism2UsRP0yPcIupqcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307288245777-q5eb4pcso9crfvto7j7jl39ru9smsne4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
