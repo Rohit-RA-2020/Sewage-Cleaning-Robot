@@ -19,30 +19,30 @@ class _ControllerPageState extends State<ControllerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('devicestate')
-            .doc('torch')
-            .snapshots(),
-        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          if (snapshot.data == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              title: Text(
-                'Sewage Robot Controller',
-                style: GoogleFonts.robotoMono(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              actions: [
-                Switch(
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Sewage Robot Controller',
+          style: GoogleFonts.robotoMono(
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        actions: [
+          StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('devicestate')
+                .doc('torch')
+                .snapshots(),
+            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              if (snapshot.data == null) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return Switch(
                   value: snapshot.data!['state'],
                   onChanged: (value) async {
                     firestoreInstance
@@ -52,46 +52,48 @@ class _ControllerPageState extends State<ControllerPage> {
                       {'state': value},
                     );
                   },
+                );
+              }
+            },
+          ),
+          const SizedBox(width: 10)
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(height: 10),
+            const CustomNeuButton(
+              icon: Icons.arrow_circle_up_outlined,
+              cmd: 'F',
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: const [
+                CustomNeuButton(
+                  icon: Icons.arrow_circle_left_outlined,
+                  cmd: 'L',
                 ),
-                const SizedBox(width: 10)
+                CustomNeuButton(
+                  icon: Icons.arrow_circle_right_outlined,
+                  cmd: 'R',
+                ),
               ],
             ),
-            body: SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  const SizedBox(height: 10),
-                  CustomNeuButton(
-                    icon: Icons.arrow_circle_up_outlined,
-                    onPressed: () {},
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CustomNeuButton(
-                        icon: Icons.arrow_circle_left_outlined,
-                        onPressed: () {},
-                      ),
-                      CustomNeuButton(
-                        icon: Icons.arrow_circle_right_outlined,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                  CustomNeuButton(
-                    icon: Icons.arrow_circle_down_outlined,
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 20),
-                  const VideoStream(),
-                  const SizedBox(height: 70),
-                  // add a emergency stop button
-                  const EmergencyButton(),
-                ],
-              ),
+            const CustomNeuButton(
+              icon: Icons.arrow_circle_down_outlined,
+              cmd: 'B',
             ),
-          );
-        });
+            const SizedBox(height: 20),
+            const VideoStream(),
+            const SizedBox(height: 70),
+            // add a emergency stop button
+            const EmergencyButton(),
+          ],
+        ),
+      ),
+    );
   }
 }
 

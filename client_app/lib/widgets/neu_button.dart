@@ -1,15 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter/services.dart';
 
-class CustomNeuButton extends StatelessWidget {
+class CustomNeuButton extends StatefulWidget {
   const CustomNeuButton({
     super.key,
     required this.icon,
-    required this.onPressed,
+    required this.cmd,
   });
 
   final IconData icon;
-  final void Function() onPressed;
+  final String cmd;
+
+  @override
+  State<CustomNeuButton> createState() => _CustomNeuButtonState();
+}
+
+class _CustomNeuButtonState extends State<CustomNeuButton> {
+  FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+
+  void sendCommand(String command) {
+    firestoreInstance.collection('commands').doc('list').update(
+      {
+        'cmd': command,
+        'time': DateTime.now().microsecondsSinceEpoch,
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +35,7 @@ class CustomNeuButton extends StatelessWidget {
       width: 100,
       child: NeumorphicButton(
         onPressed: () {
-          //onPressed;
+          sendCommand(widget.cmd);
           HapticFeedback.lightImpact();
           SystemSound.play(SystemSoundType.click);
         },
@@ -28,7 +45,7 @@ class CustomNeuButton extends StatelessWidget {
           boxShape: NeumorphicBoxShape.circle(),
         ),
         padding: const EdgeInsets.all(12.0),
-        child: Icon(icon, size: 80),
+        child: Icon(widget.icon, size: 80),
       ),
     );
   }
