@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/neu_button.dart';
@@ -59,18 +59,18 @@ class _ControllerPageState extends State<ControllerPage> {
           const SizedBox(width: 10)
         ],
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(height: 10),
-            const CustomNeuButton(
+            SizedBox(height: 10),
+            CustomNeuButton(
               icon: Icons.arrow_circle_up_outlined,
               cmd: 'F',
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 CustomNeuButton(
                   icon: Icons.arrow_circle_left_outlined,
                   cmd: 'L',
@@ -81,15 +81,15 @@ class _ControllerPageState extends State<ControllerPage> {
                 ),
               ],
             ),
-            const CustomNeuButton(
+            CustomNeuButton(
               icon: Icons.arrow_circle_down_outlined,
               cmd: 'B',
             ),
-            const SizedBox(height: 20),
-            const VideoStream(),
-            const SizedBox(height: 70),
+            SizedBox(height: 20),
+            VideoStream(),
+            SizedBox(height: 70),
             // add a emergency stop button
-            const EmergencyButton(),
+            EmergencyButton(),
           ],
         ),
       ),
@@ -128,17 +128,15 @@ class EmergencyButton extends StatelessWidget {
                           .update(
                         {'state': true},
                       ).whenComplete(
-                        () => {
-                          Future.delayed(
-                            const Duration(seconds: 11),
-                            () => FirebaseFirestore.instance
-                                .collection('devicestate')
-                                .doc('emergencyStop')
-                                .update(
-                              {'state': false},
-                            ),
+                        () => Future.delayed(
+                          const Duration(seconds: 11),
+                          () => FirebaseFirestore.instance
+                              .collection('devicestate')
+                              .doc('emergencyStop')
+                              .update(
+                            {'state': false},
                           ),
-                        },
+                        ),
                       );
                     },
               style: ElevatedButton.styleFrom(

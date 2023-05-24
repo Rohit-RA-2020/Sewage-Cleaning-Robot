@@ -1,5 +1,5 @@
 import 'package:client_app/providers/provider.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hmssdk_flutter/hmssdk_flutter.dart';
 
@@ -13,22 +13,12 @@ class VideoStream extends StatefulWidget {
 class _VideoStreamState extends State<VideoStream> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-      child: Neumorphic(
-        style: NeumorphicStyle(
-          shape: NeumorphicShape.concave,
-          depth: -5,
-          boxShape: NeumorphicBoxShape.roundRect(
-              BorderRadius.circular(12),
-          ),
-        ),
-        padding: const EdgeInsets.all(12.0),
-        child: const SizedBox(
-          height: 200.0,
-          width: double.infinity,
-          child: MeetingPage(),
-        ),
+    return const Padding(
+      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+      child: SizedBox(
+        height: 220.0,
+        width: double.infinity,
+        child: MeetingPage(),
       ),
     );
   }
@@ -306,4 +296,7 @@ class _MeetingPageState extends ConsumerState<MeetingPage>
             ),
     );
   }
+
+  @override
+  void onSessionStoreAvailable({HMSSessionStore? hmsSessionStore}) {}
 }

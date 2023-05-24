@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomNeuButton extends StatefulWidget {
@@ -33,19 +33,15 @@ class _CustomNeuButtonState extends State<CustomNeuButton> {
     return SizedBox(
       height: 100,
       width: 100,
-      child: NeumorphicButton(
-        onPressed: () {
+      child: GestureDetector(
+        onTap: () {
           sendCommand(widget.cmd);
           HapticFeedback.lightImpact();
           SystemSound.play(SystemSoundType.click);
         },
-        style: const NeumorphicStyle(
-          shape: NeumorphicShape.convex,
-          depth: 2,
-          boxShape: NeumorphicBoxShape.circle(),
+        child: Center(
+          child: Icon(widget.icon, size: 80),
         ),
-        padding: const EdgeInsets.all(12.0),
-        child: Icon(widget.icon, size: 80),
       ),
     );
   }
